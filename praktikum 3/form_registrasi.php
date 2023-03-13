@@ -91,6 +91,9 @@
                     <th>domisili</th>
                     <th>program studi</th>
                     <th>skill user</th>
+                    <th>point</th>
+                    <th>predikat</th>
+
                 </tr>
                 <?php
                 if(isset($_POST ['submit'])){
@@ -101,6 +104,47 @@
                     $domisili = $_POST['domisili'];
                     $program_studi = $_POST['program_studi'];
                     $skills = $_POST['skill'];
+                    $point = 0;
+                    $predikat ="";
+                    
+
+                    foreach ($skills as $skill) {
+                        switch ($skill) {
+                            case 'HTML':
+                                $point += 10;
+                                break;
+                            case 'CSS':
+                                $point += 10;
+                                break;
+                            case 'Javaacript':
+                                $point += 20;
+                                break;
+                            case 'RWD Bootstrap':
+                                $point += 20;
+                                break;
+                            case 'PHP':
+                                $point += 30;
+                                break;
+                            case 'Python':
+                                    $point += 30;
+                                    break;
+                            case 'java':
+                                    $point += 50;
+                                    break;
+                                                           
+                        }
+                    }
+                    if($point >= 100 && $point <= 150) {
+                        $predikat = "sangat baik";
+                    } elseif($point >= 60 && $point <= 100) {
+                        $predikat ="baik";
+                    } elseif($point >= 40 && $point <= 60) {
+                        $predikat = "cukup";
+                    } elseif($point >= 40 && $point <= 0) {
+                        $predikat = "kurang";
+                    }else {
+                         $predikat ="tidak memadai";
+                    }
                 ?>
                 <tr>
                     <td><?= $nim; ?></td>
@@ -110,6 +154,9 @@
                     <td><?= $domisili; ?></td>
                     <td><?= $program_studi; ?></td>
                     <td><?php foreach($skills as $skill){echo $skill . " ";}; ?></td>
+                    <td><?= $point; ?></td>
+                    <td><?= $predikat; ?></td>
+                   
                 </tr>
                 <?php } ?>
             </table>
